@@ -4,7 +4,11 @@ pipeline {
     	label 'pipeline'
     }
     
-    stages{
+	triggers {
+		pollSCM('* * * * *')
+	}
+	
+    stages {
         stage('Build'){
             steps {
                 sh 'mvn clean package'
@@ -16,6 +20,7 @@ pipeline {
                 }
             }
         }
+        /*
         stage ('Deploy to Staging'){
             steps {
                 timeout(time:5, unit:'DAYS') {
@@ -37,6 +42,7 @@ pipeline {
                 echo 'Code deployed to Production.'
             }
         }
+        */
 
     }
 }
